@@ -44,6 +44,7 @@
 	function recordToObject(record) {
 		return Object.keys(FIELDS).reduce(function (obj, f) {
 			obj[FIELDS[f]] = record.getFieldValue(FIELDS[f]);
+			return obj;
 		}, {
 			id : record.getId(),
 			type : record.getRecordType()
