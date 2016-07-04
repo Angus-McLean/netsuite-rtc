@@ -35,7 +35,7 @@
 	
 	ChatSession.prototype.joinFromId = function (chatRecordId) {
 		var obj = netsuiteRtc_module.loadChatRecordObject(chatRecordId);
-		ChatSession.prototype.call(this, obj);
+		ChatSession.prototype.joinFromObject.call(this, obj);
 	};
 	
 	ChatSession.prototype.joinFromSearchResult = function (chatRecord) {
