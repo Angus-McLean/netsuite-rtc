@@ -58,7 +58,7 @@
 		chatSesObj.RTCSession.setOffer(offerObj);
 		chatSesObj.RTCSession.peerConnection.onicecandidate = function (ev) {
 			if (ev.candidate == null) {
-				var acceptDesc = self.RTCSession.peerConnection.localDescription;
+				var acceptDesc = JSON.stringify(self.RTCSession.peerConnection.localDescription);
 				netsuiteRtc_module.updateField(self.sessionRecordId, nsFields.ANSWER, acceptDesc);
 			}
 		};
