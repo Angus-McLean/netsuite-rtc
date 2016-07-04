@@ -1,7 +1,5 @@
 (function () {
 	
-	var connectionRecord;
-	
 	var RECORD_TYPE = 'customrecord_webrtc_connector';
 	var FIELDS = {
 		OFFER : 'custrecord_rtc_offer',
@@ -9,8 +7,12 @@
 	};
 	
 	function initializeConnection(connectorObj) {
-		var conRec = nlapiCreateRecord(RECORD_TYPE, connectorObj);
-		connectionRecord = conRec;
+		var conRec = nlapiCreateRecord(RECORD_TYPE);
+		for (var i in connectorObj) {
+			if (connectorObj.hasOwnProperty(i)) {
+				conRec.setFieldValue(i, connectorObj[i])
+			}
+		}
 		return nlapiSubmitRecord(conRec);
 	}
 
@@ -59,7 +61,6 @@
 		},
 		initializeConnection : initializeConnection,
 		findOpenConnections : findOpenConnections,
-		connectionRecord : connectionRecord,
 		updateField : updateField
 	};
 	window.netsuiteRtc_module = netsuiteRtc_module;
