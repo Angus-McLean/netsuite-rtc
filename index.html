@@ -7,7 +7,7 @@
 		<link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 		<link href="/css/styles.css" rel="stylesheet">
 		
-		<script type="text/javascript" src="/bower_components/webrtc-adapter/adapter.js"></script>
+		<script type="text/javascript" src="/js/cue/webrtc-adapter/adapter.js"></script>
 		
 		<script type="text/javascript" src="/js/cue/render_engine.js"></script>
 		<script type="text/javascript" src="/js/cue/generic-rtc.js"></script>
@@ -41,7 +41,7 @@
 		</div>
 	</body>
 	<script type="text/javascript">
-		if(window.location.host.indexOf('netsuite') > -1) {
+		//if(window.location.host.indexOf('netsuite') > -1) {
 			// inside netsuite context.. lazy load all files
 			getScriptURLs().forEach(function (u) {
 				var xhr = new XMLHttpRequest();
@@ -52,12 +52,12 @@
 					eval.call(window, xhr.responseText);
 				};
 			})
-		}
+		//}
 		
 		function getScriptURLs() {
 			var gitBaseURL = "https://raw.githubusercontent.com/Angus-McLean/netsuite-rtc/master";
-			return document.querySelectorAll('script').map(function (e) {
-				return gitBaseURL + e.src
+			return Array.prototype.map.call(document.querySelectorAll('script[src]'), function (e) {
+				return gitBaseURL + e.src.replace(location.href, '/');
 			});
 		}
 	</script>
