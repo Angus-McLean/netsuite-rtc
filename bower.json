@@ -1,0 +1,17 @@
+{
+  "name": "netsuite-rtc",
+  "main": "netsuite-rtc.js",
+  "description": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "webrtc-adapter": "gh-pages"
+  }
+}

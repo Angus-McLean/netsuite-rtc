@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>NetSuite - WebRTC</title>
+		
+		<link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+		<link href="/css/styles.css" rel="stylesheet">
+		
+		<script type="text/javascript" src="/bower_components/webrtc-adapter/adapter.js"></script>
+		
+		<script type="text/javascript" src="/js/cue/render_engine.js"></script>
+		<script type="text/javascript" src="/js/cue/generic-rtc.js"></script>
+		<script type="text/javascript" src="/js/cue/netsuite-rtc.js"></script>
+		<script type="text/javascript" src="/js/cue/chat.js"></script>
+	</head>
+	<body>
+		<div class="container-fluid row top-buffer">
+			
+			<div class="col-md-offset-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+				<div class="panel panel-default">
+					<div class="panel-heading top-bar">
+						<div class="col-md-8 col-xs-8">
+							<h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span> Chat - {{chatname}}</h3>
+						</div>
+					</div>
+					<div class="panel-body msg_container_base">
+						<!-- chat messages go here -->
+						
+					</div>
+					<div class="panel-footer">
+						<div class="input-group">
+							<input id="btn-input" type="text" class="form-control input-sm chat_input" placeholder="Write your message here...">
+							<span class="input-group-btn">
+								<button class="btn btn-primary btn-sm" id="btn-chat">Send</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
