@@ -46,19 +46,34 @@
 			if(window.location.host.indexOf('netsuite') > -1) {
 				// inside netsuite context.. lazy load all files
 				cloneCSS();
+				evalAllScripts();
+			}
+			
+			function fetchRespText(url, asyncOrCb) {
+				var execAsync = typeof asyncOrCb === 'function';
+				
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', u, execAsync);
+				xhr.send()
+				xhr.onload = function () {
+					console.log('loaded ', u);
+					if(execAsync) {
+						asyncOrCb(xhr.responseText);
+					} else {
+						return xhr.responseText;
+					}
+					
+					
+				};
+			}
+			
+			function evalAllScripts() {
 				getScriptURLs().forEach(function (u) {
-					var xhr = new XMLHttpRequest();
-					xhr.open('GET', u, false);
-					xhr.send()
-					xhr.onload = function () {
-						console.log('loaded ', u);
-						eval.call(window, xhr.responseText);
-					};
-				})
+					eval.call(window, fetchRespText(u));
+				});
 			}
 			
 			function getScriptURLs() {
-				
 				return Array.prototype.map.call(document.querySelectorAll('script[src]'), function (e) {
 					return gitBaseURL + e.src.replace(location.origin, '');
 				});
@@ -66,10 +81,18 @@
 			
 			function cloneCSS() {
 				Array.prototype.forEach.call(document.querySelectorAll('link[href]'), function (e) {
-					var cssElem = document.createElement('link');
-					cssElem.rel = 'stylesheet';
-					cssElem.href = gitBaseURL + e.href.replace(location.origin, '');
-					document.head.appendChild(cssElem);
+					var cssElem = document.createElement('style');
+					cssElem.type = 'text/css';
+					
+					fetchRespText(gitBaseURL + e.href.replace(location.origin, ''), function (cssText) {
+						if (style.styleSheet){
+							style.styleSheet.cssText = css;
+						} else {
+							style.appendChild(document.createTextNode(css));
+						}
+						
+						document.head.appendChild(style);
+					});
 				});
 			}	
 		})();
