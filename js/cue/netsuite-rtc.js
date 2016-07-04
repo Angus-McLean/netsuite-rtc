@@ -13,7 +13,7 @@
 		connectionRecord = conRec;
 		return nlapiSubmitRecord(conRec);
 	}
-	
+
 	function findOpenConnections() {
 		var filters = [
 			[FIELDS.OFFER, 'isnotempty', null],
@@ -24,6 +24,10 @@
 		return searchResultToObj(res);
 	}
 	
+	function loadChatRecordObject(id) {
+		return recordToObject(nlapiLoadRecord(RECORD_TYPE,id));
+	}
+	
 	function searchResultToObj(searchRes) {
 		return searchRes && searchRes.map(function (row) {
 			
@@ -32,6 +36,15 @@
 			retObj.type = row.type;
 			
 			return retObj;
+		});
+	}
+	
+	function recordToObject(record) {
+		return FIELDS.reduce(function (obj, f) {
+			obj[f] = record.getFieldValue(f);
+		}, {
+			id : record.getId(),
+			type : record.getRecordType()
 		});
 	}
 	

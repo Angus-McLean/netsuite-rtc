@@ -33,8 +33,9 @@
 		});
 	};
 	
-	ChatSession.prototype.joinFromId = function (chatRecord) {
-		
+	ChatSession.prototype.joinFromId = function (chatRecordId) {
+		var obj = netsuiteRtc_module.loadChatRecordObject(chatRecordId);
+		ChatSession.prototype.call(this, obj);
 	};
 	
 	ChatSession.prototype.joinFromSearchResult = function (chatRecord) {
@@ -52,7 +53,7 @@
 		// assume contains all necessary information (offer string, etc)
 		var chatSesObj = (this === ChatSession.prototype) ? new ChatSession(chatRecord) : this;
 		
-		this.sessionRecordId = chatRecord.id || chatRecord.internalid;
+		this.sessionRecordId = chatRecord.id;
 		chatSesObj.setOffer(chatRecord[nsFields.OFFER]);
 		chatSesObj.RTCSession.peerConnection.onicecandidate = function (ev) {
 			if (e.candidate == null) {
