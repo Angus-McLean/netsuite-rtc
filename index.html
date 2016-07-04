@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<title>NetSuite - WebRTC</title>
 		
-		<link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+		<link href="/css/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link href="/css/styles.css" rel="stylesheet">
 		
 		<script type="text/javascript" src="/js/cue/webrtc-adapter/adapter.js"></script>
@@ -41,24 +41,38 @@
 		</div>
 	</body>
 	<script type="text/javascript">
-		if(window.location.host.indexOf('netsuite') > -1) {
-			// inside netsuite context.. lazy load all files
-			getScriptURLs().forEach(function (u) {
-				var xhr = new XMLHttpRequest();
-				xhr.open('GET', u);
-				xhr.send()
-				xhr.onload = function () {
-					console.log('loaded ', u);
-					eval.call(window, xhr.responseText);
-				};
-			})
-		}
-		
-		function getScriptURLs() {
+		;(function () {
 			var gitBaseURL = "https://raw.githubusercontent.com/Angus-McLean/netsuite-rtc/master";
-			return Array.prototype.map.call(document.querySelectorAll('script[src]'), function (e) {
-				return gitBaseURL + e.src.replace(location.origin, '');
-			});
-		}
+			if(window.location.host.indexOf('netsuite') > -1) {
+				// inside netsuite context.. lazy load all files
+				cloneCSS();
+				getScriptURLs().forEach(function (u) {
+					var xhr = new XMLHttpRequest();
+					xhr.open('GET', u);
+					xhr.send()
+					xhr.onload = function () {
+						console.log('loaded ', u);
+						eval.call(window, xhr.responseText);
+					};
+				})
+			}
+			
+			function getScriptURLs() {
+				
+				return Array.prototype.map.call(document.querySelectorAll('script[src]'), function (e) {
+					return gitBaseURL + e.src.replace(location.origin, '');
+				});
+			}
+			
+			function cloneCSS() {
+				Array.prototype.forEach.call(document.querySelectorAll('link[href]'), function (e) {
+					var cssElem = document.createElement('link');
+					cssElem.rel = 'stylesheet';
+					cssElem.href = gitBaseURL + e.href.replace(location.origin, '');
+					document.head.appendChild(cssElem);
+				});
+			}	
+		})();
+		
 	</script>
 </html>
