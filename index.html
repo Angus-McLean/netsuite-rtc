@@ -62,13 +62,12 @@
 					} else {
 						return xhr.responseText;
 					}
-					
-					
 				};
 			}
 			
 			function evalAllScripts() {
 				getScriptURLs().forEach(function (u) {
+					debugger;
 					eval.call(window, fetchRespText(u, false));
 				});
 			}
