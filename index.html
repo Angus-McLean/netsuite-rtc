@@ -53,10 +53,10 @@
 				var execAsync = typeof asyncOrCb === 'function';
 				
 				var xhr = new XMLHttpRequest();
-				xhr.open('GET', u, execAsync);
+				xhr.open('GET', url, execAsync);
 				xhr.send()
 				xhr.onload = function () {
-					console.log('loaded ', u);
+					console.log('loaded ', url);
 					if(execAsync) {
 						asyncOrCb(xhr.responseText);
 					} else {
