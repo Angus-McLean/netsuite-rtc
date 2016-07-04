@@ -11,6 +11,7 @@
 		
 		var self = this;
 		
+		this.sessionRecord = null;
 		this.sessionRecordId = null;
 		
 		// create RTC Session
@@ -33,19 +34,29 @@
 		});
 	};
 	
+	ChatSession.prototype.resyncSessionRecord = function () {
+		var self = this;
+		var newRec = netsuiteRtc_module.loadChatRecordObject(this.sessionRecordId);
+		if(JSON.stringify(newRec) !== JSON.stringify(this.sessionRecord)) {
+			// record has changed
+			// if new record has ANSWER accept the offer
+			if(newRec[nsFields.ANSWER]) this.acceptOffer(offerStr);
+		}
+	};
+	
+	ChatSession.prototype.acceptOffer = function (offerStr) {
+		var answerObj = JSON.parse(offerStr);
+		self.RTCSession.setAnswer(answerObj);
+	};
+	
 	ChatSession.prototype.joinFromId = function (chatRecordId) {
 		var obj = netsuiteRtc_module.loadChatRecordObject(chatRecordId);
 		ChatSession.prototype.joinFromObject.call(this, obj);
 	};
 	
-	ChatSession.prototype.joinFromSearchResult = function (chatRecord) {
-		// assume contains all necessary information (offer string, etc)
-		var offerObj = {};
-		
-	};
-	
 	ChatSession.prototype.joinFromRecord = function (chatRecord) {
-		
+		var obj = netsuiteRtc_module.recordToObject(chatRecord);
+		ChatSession.prototype.joinFromObject.call(this, obj);
 	};
 	
 	ChatSession.prototype.joinFromObject = function (chatRecord) {

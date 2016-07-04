@@ -63,7 +63,8 @@
 		initializeConnection : initializeConnection,
 		findOpenConnections : findOpenConnections,
 		updateField : updateField,
-		loadChatRecordObject : loadChatRecordObject
+		loadChatRecordObject : loadChatRecordObject,
+		recordToObject : recordToObject
 	};
 	window.netsuiteRtc_module = netsuiteRtc_module;
 	return netsuiteRtc_module;
