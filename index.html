@@ -67,8 +67,9 @@
 			
 			function evalAllScripts() {
 				getScriptURLs().forEach(function (u) {
-					debugger;
-					eval.call(window, fetchRespText(u, false));
+					var jsText = fetchRespText(u, false);
+					console.dir({text : jsText});
+					eval.call(window, jsText);
 				});
 			}
 			
