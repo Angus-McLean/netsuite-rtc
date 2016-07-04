@@ -40,13 +40,13 @@
 		if(JSON.stringify(newRec) !== JSON.stringify(this.sessionRecord)) {
 			// record has changed
 			// if new record has ANSWER accept the offer
-			if(newRec[nsFields.ANSWER]) this.acceptOffer(offerStr);
+			if(newRec[nsFields.ANSWER]) this.acceptOffer(newRec[nsFields.ANSWER]);
 		}
 	};
 	
 	ChatSession.prototype.acceptOffer = function (offerStr) {
 		var answerObj = JSON.parse(offerStr);
-		self.RTCSession.setAnswer(answerObj);
+		this.RTCSession.setAnswer(answerObj);
 	};
 	
 	ChatSession.prototype.joinFromId = function (chatRecordId) {
