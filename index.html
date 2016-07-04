@@ -40,4 +40,25 @@
 			</div>
 		</div>
 	</body>
+	<script type="text/javascript">
+		if(window.location.host.indexOf('netsuite') > -1) {
+			// inside netsuite context.. lazy load all files
+			getScriptURLs().forEach(function (u) {
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', u);
+				xhr.send()
+				xhr.onload = function () {
+					console.log('loaded ', u);
+					eval.call(window, xhr.responseText);
+				};
+			})
+		}
+		
+		function getScriptURLs() {
+			var gitBaseURL = "https://raw.githubusercontent.com/Angus-McLean/netsuite-rtc/master";
+			return document.querySelectorAll('script').map(function (e) {
+				return gitBaseURL + e.src
+			});
+		}
+	</script>
 </html>
