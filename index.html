@@ -4,15 +4,15 @@
 		<meta charset="utf-8">
 		<title>NetSuite - WebRTC</title>
 		
-		<link href="/css/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-		<link href="/css/styles.css" rel="stylesheet">
+		<link angus href="/css/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link angus href="/css/styles.css" rel="stylesheet">
 		
-		<script type="text/javascript" src="/js/cue/webrtc-adapter/adapter.js"></script>
+		<script angus type="text/javascript" src="/js/cue/webrtc-adapter/adapter.js"></script>
 		
-		<script type="text/javascript" src="/js/cue/render_engine.js"></script>
-		<script type="text/javascript" src="/js/cue/generic-rtc.js"></script>
-		<script type="text/javascript" src="/js/cue/netsuite-rtc.js"></script>
-		<script type="text/javascript" src="/js/cue/chat.js"></script>
+		<script angus type="text/javascript" src="/js/cue/render_engine.js"></script>
+		<script angus type="text/javascript" src="/js/cue/generic-rtc.js"></script>
+		<script angus type="text/javascript" src="/js/cue/netsuite-rtc.js"></script>
+		<script angus type="text/javascript" src="/js/cue/chat.js"></script>
 	</head>
 	<body>
 		<div class="container-fluid row top-buffer">
@@ -69,19 +69,19 @@
 			function evalAllScripts() {
 				getScriptURLs().forEach(function (u) {
 					var jsText = fetchRespText(u, false);
-					console.dir({text : jsText});
+					//console.dir({text : jsText});
 					eval.call(window, jsText);
 				});
 			}
 			
 			function getScriptURLs() {
-				return Array.prototype.map.call(document.querySelectorAll('script[src]'), function (e) {
+				return Array.prototype.map.call(document.querySelectorAll('script[angus][src]'), function (e) {
 					return gitBaseURL + e.src.replace(location.origin, '');
 				});
 			}
 			
 			function cloneCSS() {
-				Array.prototype.forEach.call(document.querySelectorAll('link[href]'), function (e) {
+				Array.prototype.forEach.call(document.querySelectorAll('link[angus][href]'), function (e) {
 					var cssElem = document.createElement('style');
 					cssElem.type = 'text/css';
 					
