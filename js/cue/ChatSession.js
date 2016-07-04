@@ -54,7 +54,7 @@
 		var chatSesObj = (this === ChatSession.prototype) ? new ChatSession(chatRecord) : this;
 		
 		this.sessionRecordId = chatRecord.id;
-		chatSesObj.setOffer(chatRecord[nsFields.OFFER]);
+		chatSesObj.RTCSession.setOffer(chatRecord[nsFields.OFFER]);
 		chatSesObj.RTCSession.peerConnection.onicecandidate = function (ev) {
 			if (e.candidate == null) {
 				var acceptDesc = self.RTCSession.peerConnection.localDescription;
