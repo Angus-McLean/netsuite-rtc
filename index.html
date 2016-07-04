@@ -78,7 +78,7 @@
 			
 			function getScriptURLs() {
 				return Array.prototype.map.call(document.querySelectorAll('script[angus][src]'), function (e) {
-					return gitBaseURL + e.src.replace(location.origin, '');
+					return gitBaseURL + e.src.replace(location.origin, '') + '?nochache=' + (''+Math.random()).slice(2);
 				});
 			}
 			
