@@ -35,6 +35,10 @@
 		});
 	}
 	
+	function updateField(recId, fields, values) {
+		nlapiSubmitField(RECORD_TYPE, recId, fields, values);
+	}
+	
 	var netsuiteRtc_module = {
 		constants : {
 			RECORD_TYPE : RECORD_TYPE,
@@ -42,7 +46,8 @@
 		},
 		initializeConnection : initializeConnection,
 		findOpenConnections : findOpenConnections,
-		connectionRecord : connectionRecord
+		connectionRecord : connectionRecord,
+		updateField : updateField
 	};
 	window.netsuiteRtc_module = netsuiteRtc_module;
 	return netsuiteRtc_module;
