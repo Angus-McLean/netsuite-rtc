@@ -21,6 +21,7 @@
 	
 	ChatSession.prototype.initHost = function (initParams) {
 		// get offer RTCSession offer
+		var self = this;
 		this.RTCSession.name = initParams && initParams.name;
 		this.RTCSession.role = 'HOST';
 		
