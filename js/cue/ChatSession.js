@@ -57,7 +57,7 @@
 		var offerObj = JSON.parse(chatRecord[nsFields.OFFER]);
 		chatSesObj.RTCSession.setOffer(offerObj);
 		chatSesObj.RTCSession.peerConnection.onicecandidate = function (ev) {
-			if (e.candidate == null) {
+			if (ev.candidate == null) {
 				var acceptDesc = self.RTCSession.peerConnection.localDescription;
 				netsuiteRtc_module.updateField(self.sessionRecordId, nsFields.ANSWER, acceptDesc);
 			}
