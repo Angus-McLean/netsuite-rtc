@@ -2,7 +2,7 @@
 
 ## Synopsis
 
-Peer to Peer - Serverless communication between 2 clients. Uses NetSuite as means of selecting other peer and passing connection information between the 2.
+Peer to Peer - Serverless communication between 2 clients. Uses NetSuite as means of selecting other peer and passing connection information between the two clients.
 
 ## Code Example
 
