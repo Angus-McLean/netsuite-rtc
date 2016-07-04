@@ -24,7 +24,7 @@
 		this.RTCSession.role = 'HOST';
 		
 		this.RTCSession.createOffer(function (er, offer) {
-			if(err) return console.error(er);
+			if(er) return console.error(er);
 			
 			var initObj = {};
 			initObj.name = (''+Math.random()).slice(2);
