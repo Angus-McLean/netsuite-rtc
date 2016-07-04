@@ -84,14 +84,14 @@
 					var cssElem = document.createElement('style');
 					cssElem.type = 'text/css';
 					
-					fetchRespText(gitBaseURL + e.href.replace(location.origin, ''), function (cssText) {
-						if (style.styleSheet){
-							style.styleSheet.cssText = css;
+					fetchRespText(gitBaseURL + e.href.replace(location.origin, ''), function (rawCssText) {
+						if (cssElem.styleSheet){
+							cssElem.styleSheet.cssText = rawCssText;
 						} else {
-							style.appendChild(document.createTextNode(css));
+							cssElem.appendChild(document.createTextNode(rawCssText));
 						}
 						
-						document.head.appendChild(style);
+						document.head.appendChild(cssElem);
 					});
 				});
 			}	
