@@ -3,7 +3,7 @@
 	
 	var nsFields = netsuiteRtc_module.constants.FIELDS;
 	
-	var ChatSession = {
+	var ChatSessionsList = {
 		listeningHost : null
 	};
 	
@@ -12,7 +12,6 @@
 		var self = this;
 		
 		this.sessionRecordId = null;
-		this.RTCSession = null;
 		
 		// create RTC Session
 		this.RTCSession = new RTCSession();
@@ -22,7 +21,7 @@
 	ChatSession.prototype.initHost = function (initParams) {
 		// get offer RTCSession offer
 		this.RTCSession.name = initParams && initParams.name;
-		this.RTCSession.role = initParams && initParams.role;
+		this.RTCSession.role = 'HOST';
 		
 		this.RTCSession.createOffer(function (er, offer) {
 			if(err) return console.error(er);
