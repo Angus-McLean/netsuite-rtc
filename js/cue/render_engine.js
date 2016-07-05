@@ -42,13 +42,13 @@
 		};
 	}
 
-	var renderer = {
+	var render_engine = {
 		prepend : builder(prependToNode),
 		append : builder(appendToNode),
 		replace : builder(fillInNode)
 	};
 
-	window.renderer = renderer;
-	return renderer;
+	window.render_engine = render_engine;
+	return render_engine;
 
 })();

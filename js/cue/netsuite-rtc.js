@@ -46,6 +46,16 @@
 		});
 	}
 
+	function reduceToValues(arrOrObj) {
+		function reduceObj(obj){
+			return Object.keys(obj).reduce(function (final, key) {
+				final[key] = (obj[key] && obj[key].value !== undefined) ? final[key] = obj[key].value : final[key] = obj[key];
+				return final;
+			});
+		}
+		return (Array.isArray(arrOrObj)) ? arrOrObj.map(reduceObj) : reduceObj(arrOrObj);
+	}
+
 	function recordToObject(record) {
 		return Object.keys(FIELDS).reduce(function (obj, f) {
 			obj[FIELDS[f]] = record.getFieldValue(FIELDS[f]);
@@ -69,7 +79,8 @@
 		findOpenConnections : findOpenConnections,
 		updateField : updateField,
 		loadChatRecordObject : loadChatRecordObject,
-		recordToObject : recordToObject
+		recordToObject : recordToObject,
+		reduceToValues : reduceToValues
 	};
 	window.netsuiteRtc_module = netsuiteRtc_module;
 	return netsuiteRtc_module;
