@@ -95,7 +95,7 @@
 	};
 
 	ChatSession.prototype.send = function (msgObj) {
-		self.RTCSession.dataChannel.send(JSON.stringify(msgObj));
+		this.RTCSession.dataChannel.send(JSON.stringify(msgObj));
 	};
 
 	window.ChatSession = ChatSession;
