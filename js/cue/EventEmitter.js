@@ -4,7 +4,7 @@
 	var EventEmitter = function () {
 		var _this = this;
 		_this.events = {};
-	}
+	};
 
 	EventEmitter.prototype = {
 		on : function(name, handler) {
@@ -12,6 +12,10 @@
 			this.events[name].push(handler);
 			else
 			this.events[name] = [handler];
+		},
+
+		onAll : function (handler) {
+			this.on.call(this, '*', handler);
 		},
 
 		removeEventListener : function(name, handler) {
@@ -26,6 +30,7 @@
 		},
 
 		emit : function(name, args) {
+			if(name !== '*') this.emit('*', {name:name, event:args});
 			if (!this.events.hasOwnProperty(name))
 			return;
 

@@ -70,8 +70,8 @@
 		//var fileReceiver = new FileReceiver();
 		var fileReceiver;
 		console.log('Received datachannel ', arguments);
-		dataChannel.onopen = rtcSessObj.bind(this, 'open');
-		dataChannel.onclose = rtcSessObj.bind(this, 'close');
+		dataChannel.onopen = rtcSessObj.emit.bind(this, 'open');
+		dataChannel.onclose = rtcSessObj.emit.bind(this, 'close');
 
 		dataChannel.onmessage = function (e) {
 			console.log('Got message ', e.data);

@@ -10,14 +10,17 @@
 	function ChatSession() {
 
 		var self = this;
+		EventEmitter.call(this);
 
 		this.sessionRecord = null;
 		this.sessionRecordId = null;
 
 		// create RTC Session
 		this.RTCSession = new RTCSession();
+		this.RTCSession.onAll(function (ev) {
+			self.emit(ev.name, ev.event);
+		});
 
-		EventEmitter.call(this);
 	}
 	ChatSession.prototype = Object.create(EventEmitter.prototype);
 	ChatSession.prototype.updateHost = function (initParams) {

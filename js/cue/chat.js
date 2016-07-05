@@ -68,6 +68,21 @@
 		});
 	}
 
+	function sendMessage() {
+		active.chat.send({
+			type : 'text',
+			sender : nlapiGetContext().getUser(),
+			message : document.getElementById('btn-input').value
+		});
+		return false;
+	}
+
+	function addListenersToChat(chatSesObj) {
+		chatSesObj.on('text', function (msgObj) {
+			console.log(msgObj);
+		})
+	}
+
 	var chat_module = {
 		active : active,
 		updateOrStart : updateOrStart,

@@ -46,12 +46,14 @@
 
 					</div>
 					<div class="panel-footer">
-						<div class="input-group">
-							<input id="btn-input" type="text" class="form-control input-sm chat_input" placeholder="Write your message here...">
-							<span class="input-group-btn">
-								<button class="btn btn-primary btn-sm" id="btn-chat">Send</button>
-							</span>
-						</div>
+						<form id="message-form" onsubmit="chat_module.sendMessage()">
+							<div class="input-group">
+								<input id="btn-input" type="text" class="form-control input-sm chat_input" placeholder="Write your message here...">
+								<span class="input-group-btn">
+									<button class="btn btn-primary btn-sm" id="btn-chat" onclick="document.getElementById('message-form').submit()">Send</button>
+								</span>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
