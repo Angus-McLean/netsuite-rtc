@@ -77,10 +77,16 @@
 		return false;
 	}
 
+	document.getElementById('btn-input').onkeydown = function (e) {
+		if(e.keyCode == 13){
+			sendMessage();
+		}
+	};
+
 	function addListenersToChat(chatSesObj) {
 		chatSesObj.on('text', function (msgObj) {
 			console.log(msgObj);
-		})
+		});
 	}
 
 	var chat_module = {
