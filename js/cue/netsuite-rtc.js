@@ -8,6 +8,10 @@
 		NAME : 'name'
 	};
 
+	function checkMetering() {
+		if(nlapiGetContext().getRemainingUsage() < 100) nsContextObj = null;
+	}
+
 	function initializeConnection(connectorObj) {
 		var conRec = nlapiCreateRecord(RECORD_TYPE);
 		for (var i in connectorObj) {
@@ -16,6 +20,7 @@
 			}
 		}
 		if(!connectorObj.name) conRec.setFieldValue('name', (''+Math.random()).slice(2));
+		checkMetering();
 		return nlapiSubmitRecord(conRec);
 	}
 
@@ -28,11 +33,13 @@
 		var cols = Object.keys(FIELDS).map(function (prop) {
 			return new nlobjSearchColumn(FIELDS[prop]);
 		});
+		checkMetering();
 		var res = nlapiSearchRecord(RECORD_TYPE, null, filters, cols);
 		return searchResultToObj(res);
 	}
 
 	function loadChatRecordObject(id) {
+		checkMetering();
 		return recordToObject(nlapiLoadRecord(RECORD_TYPE,id));
 	}
 
@@ -68,6 +75,7 @@
 	}
 
 	function updateField(recId, fields, values) {
+		checkMetering();
 		nlapiSubmitField(RECORD_TYPE, recId, fields, values);
 	}
 
