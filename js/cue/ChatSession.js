@@ -62,14 +62,13 @@
 	};
 
 	ChatSession.prototype.joinFromObject = function (chatRecord) {
-		var self = this;
 		// assume contains all necessary information (offer string, etc)
-		var chatSesObj = (this === ChatSession.prototype) ? new ChatSession(chatRecord) : this;
+		var self = (this === ChatSession.prototype) ? new ChatSession(chatRecord) : this;
 
-		this.sessionRecordId = chatRecord.id;
+		self.sessionRecordId = chatRecord.id;
 		var offerObj = JSON.parse(chatRecord[nsFields.OFFER]);
-		chatSesObj.RTCSession.setOffer(offerObj);
-		chatSesObj.RTCSession.peerConnection.onicecandidate = function (ev) {
+		self.RTCSession.setOffer(offerObj);
+		self.RTCSession.peerConnection.onicecandidate = function (ev) {
 			if (ev.candidate == null) {
 				var acceptDesc = JSON.stringify(self.RTCSession.peerConnection.localDescription);
 				netsuiteRtc_module.updateField(self.sessionRecordId, nsFields.ANSWER, acceptDesc);
