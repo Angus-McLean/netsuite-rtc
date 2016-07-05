@@ -35,11 +35,14 @@
 		var self = (this === ChatSession.prototype) ? new ChatSession(initParams) : this;
 		self.RTCSession.role = 'HOST';
 
-		self.RTCSession.createOffer(function (er, offer) {
-			if(er) return console.error(er);
-			self.sessionRecordId = initParams.id;
-			netsuiteRtc_module.updateField(initParams.id, nsFields.OFFER, JSON.stringify(offer));
-		});
+		setTimeout(function () {
+			console.info('updating host');
+			self.RTCSession.createOffer(function (er, offer) {
+				if(er) return console.error(er);
+				self.sessionRecordId = initParams.id;
+				netsuiteRtc_module.updateField(initParams.id, nsFields.OFFER, JSON.stringify(offer));
+			});
+		}, 1000)
 		return self;
 	};
 
@@ -117,7 +120,7 @@
 	ChatSession.prototype.addVideo = function () {
 		var self = this;
 
-		
+
 	};
 
 	window.ChatSession = ChatSession;

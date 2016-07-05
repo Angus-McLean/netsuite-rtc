@@ -6,8 +6,6 @@
 	var cfg = {'iceServers': [{'url': 'stun:23.21.150.121'}]},
 		con = {'optional': [{'DtlsSrtpKeyAgreement': true}]};
 
-	var pc1 = new RTCPeerConnection(cfg, con);
-
 	var sdpConstraints = {
 		optional: [],
 		mandatory: {

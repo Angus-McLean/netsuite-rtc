@@ -14,7 +14,10 @@
 
 		active.chat = new ChatSession();
 		addListenersToChat(active.chat);
-		active.chat.initHost(initObj);
+		setTimeout(function () {
+			console.info('initHost')
+			active.chat.initHost(initObj);
+		}, 1000);
 	}
 
 	function join(selected) {
