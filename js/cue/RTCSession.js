@@ -100,7 +100,7 @@
 			var fileReceiver2;
 			var datachannel = e.channel || e; // Chrome sends event, FF sends raw channel
 			addListenersToDataChannel(rtcSessObj, datachannel)
-			rtcSessObj.dataChannel = dc2;
+			rtcSessObj.dataChannel = datachannel;
 		};
 	}
 
