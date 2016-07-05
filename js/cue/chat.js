@@ -72,6 +72,8 @@
 	}
 
 	function sendMessage() {
+		var msgIn = document.getElementById('btn-input');
+		if(msgIn.value === '') return;
 		active.chat.sendMessage(document.getElementById('btn-input').value);
 		document.getElementById('btn-input').value = '';
 		return false;
