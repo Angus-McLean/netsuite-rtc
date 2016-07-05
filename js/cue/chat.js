@@ -5,7 +5,7 @@
 	function start() {
 		var initObj = {};
 		initObj.name = prompt('Type Chat Name');
-		initiObj.employee = nlapiGetContext().getUser();
+		initObj.employee = nlapiGetContext().getUser();
 
 		var activeChat = new ChatSession();
 		activeChat.initHost(initObj);
