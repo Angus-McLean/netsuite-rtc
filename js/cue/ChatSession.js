@@ -25,8 +25,8 @@
 
 		self.RTCSession.createOffer(function (er, offer) {
 			if(er) return console.error(er);
-
-			self.sessionRecordId = netsuiteRtc_module.updateField(initParams.id, nsFields.OFFER, JSON.stringify(offer));
+			self.sessionRecordId = initParams.id
+			netsuiteRtc_module.updateField(initParams.id, nsFields.OFFER, JSON.stringify(offer));
 		});
 		return self;
 	};
