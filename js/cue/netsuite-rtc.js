@@ -51,7 +51,7 @@
 			return Object.keys(obj).reduce(function (final, key) {
 				final[key] = (obj[key] && obj[key].value !== undefined) ? final[key] = obj[key].value : final[key] = obj[key];
 				return final;
-			});
+			}, {});
 		}
 		return (Array.isArray(arrOrObj)) ? arrOrObj.map(reduceObj) : reduceObj(arrOrObj);
 	}

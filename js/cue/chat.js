@@ -30,9 +30,18 @@
 	}
 
 	function updateActiveEmployees() {
+
+		function formatSearchResult(searchRow) {
+			return {
+				custrecord_rtc_host_employee : searchRow.custrecord_rtc_host_employee.text,
+				id : searchRow.id,
+				name : searchRow.name.value
+			};
+		}
+
 		var activeChannelsElem = document.getElementById('active-channels-list');
 		var openCons = netsuiteRtc_module.findOpenConnections();
-		openCons = netsuiteRtc_module.reduceToValues(openCons);
+		openCons = openCons.map(formatSearchResult);
 		activeChannelsElem.innerHTML = '';
 		openCons.forEach(function (connectionRec) {
 			render_engine.append(gitBaseURL + '/templates/activeUserItem.template.html', connectionRec, activeChannelsElem);
