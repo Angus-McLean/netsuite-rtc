@@ -106,6 +106,7 @@
 		var msgObj = {
 			type : 'text',
 			sender : nlapiGetContext().getUser(),
+			username : nlapiGetContext().getName(),
 			timestampe : new Date(),
 			message : msgText
 		};

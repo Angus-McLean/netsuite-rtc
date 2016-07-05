@@ -73,6 +73,7 @@
 
 	function sendMessage() {
 		active.chat.sendMessage(document.getElementById('btn-input').value);
+		document.getElementById('btn-input').value = '';
 		return false;
 	}
 
@@ -83,12 +84,15 @@
 	};
 
 	function addListenersToChat(chatSesObj) {
+		var chatLog = document.getElementById('message-container')
 		chatSesObj.on('new_message_sent', function (msgObj) {
 			console.log('new_message_sent',msgObj);
+			render_engine.append(gitBaseURL + '/templates/message_sent.template.html', msgObj, chatLog)
 		});
 
 		chatSesObj.on('new_message_received', function (msgObj) {
 			console.log('new_message_received',msgObj);
+			render_engine.append(gitBaseURL + '/templates/message_receive.template.html', msgObj, chatLog)
 		});
 	}
 
