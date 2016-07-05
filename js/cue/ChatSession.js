@@ -114,6 +114,19 @@
 		this.emit('new_message_sent', msgObj);
 	};
 
+	ChatSession.prototype.addVideo = function () {
+		navigator.getUserMedia = navigator.getUserMedia ||
+		navigator.webkitGetUserMedia ||
+		navigator.mozGetUserMedia ||
+		navigator.msGetUserMedia;
+		navigator.getUserMedia({video: true, audio: true}, function (stream) {
+			pc1.addStream(stream);
+			console.log(stream);
+		}, function (error) {
+			console.log('Error adding stream to pc1: ' + error);
+		});
+	};
+
 	window.ChatSession = ChatSession;
 	return ChatSession;
 

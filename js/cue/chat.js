@@ -73,6 +73,10 @@
 		});
 	}
 
+	function startVideo() {
+		if(!active.chat) return;
+	}
+
 	function sendMessage() {
 		var msgIn = document.getElementById('btn-input');
 		if(msgIn.value === '') return;
@@ -122,7 +126,8 @@
 		joinClick : joinClick,
 		resyncNSChatRec : resyncNSChatRec,
 		updateActiveEmployees : updateActiveEmployees,
-		sendMessage : sendMessage
+		sendMessage : sendMessage,
+		startVideo : startVideo
 	};
 
 	window.chat_module = chat_module;
