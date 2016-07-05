@@ -15,7 +15,7 @@
 				conRec.setFieldValue(i, connectorObj[i]);
 			}
 		}
-		if(!connectorObj.name) conRec.setFieldValue('name', (''+Math.random().slice(2)));
+		if(!connectorObj.name) conRec.setFieldValue('name', (''+Math.random()).slice(2));
 		return nlapiSubmitRecord(conRec);
 	}
 
