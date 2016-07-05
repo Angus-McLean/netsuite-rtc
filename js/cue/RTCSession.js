@@ -30,7 +30,7 @@
 		this.remoteAnswer = null;
 
 		this.peerConnection = new RTCPeerConnection(cfg, con);
-		addListenersToPeerConnection(rtcSessObj, peerConnection);
+		addListenersToPeerConnection(this, this.peerConnection);
 		this.dataChannel = null;
 
 		setUpConnection(this);
