@@ -1,5 +1,7 @@
 (function () {
 
+	var chatLog = document.getElementById('message-container');
+
 	var active = {
 		chat : null,
 		employees : []
@@ -26,7 +28,7 @@
 		active.chat = ChatSession.prototype.joinFromId(selected);
 		addListenersToChat(active.chat);
 
-		console.log('Waiting for host to accept your answer..');
+		render_engine.append(gitBaseURL + '/templates/dialog_mesage.template.html', {message:'Sit tight while we connect you..'}, chatLog);
 	}
 
 	function updateOrStart() {
@@ -79,6 +81,7 @@
 		return false;
 	}
 
+	render_engine.append(gitBaseURL + '/templates/dialog_mesage.template.html', {message:'Welcome to NetSuite RTC'}, chatLog);
 	document.getElementById('btn-input').onkeydown = function (e) {
 		if(e.keyCode == 13){
 			sendMessage();
@@ -86,7 +89,7 @@
 	};
 
 	function addListenersToChat(chatSesObj) {
-		var chatLog = document.getElementById('message-container')
+
 		chatSesObj.on('new_message_sent', function (msgObj) {
 			console.log('new_message_sent',msgObj);
 			render_engine.append(gitBaseURL + '/templates/message_sent.template.html', msgObj, chatLog)
@@ -96,6 +99,10 @@
 			console.log('new_message_received',msgObj);
 			render_engine.append(gitBaseURL + '/templates/message_receive.template.html', msgObj, chatLog)
 		});
+
+		chatSesObj.on('open', function (ev) {
+			render_engine.replace(gitBaseURL + '/templates/dialog_mesage.template.html', {message:'Begining of your conversation'}, chatLog);
+		})
 	}
 
 	var chat_module = {
