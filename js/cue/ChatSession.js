@@ -21,13 +21,13 @@
 
 	}
 
-	function addRTCSessionListeners(emitter, rtcSes) {
+	function addRTCSessionListeners(chatSesObj, rtcSes) {
 		// proxy all listeners
 		rtcSes.onAll(function (ev) {
-			self.emit(ev.name, ev.event);
+			chatSesObj.emit(ev.name, ev.event);
 		});
 
-		rtcSes.on('text', emitter.emit.bind(emitter, 'new_message_received'));
+		rtcSes.on('text', chatSesObj.emit.bind(chatSesObj, 'new_message_received'));
 
 	}
 	ChatSession.prototype = Object.create(EventEmitter.prototype);
