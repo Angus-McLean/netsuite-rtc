@@ -60,7 +60,7 @@
 		}
 
 		var activeChannelsElem = document.getElementById('active-channels-list');
-		active.employees = netsuiteRtc_module.findOpenConnections();
+		active.employees = netsuiteRtc_module.findOpenConnections() || [];
 		active.employees = active.employees.map(formatSearchResult);
 		activeChannelsElem.innerHTML = '';
 		active.employees.forEach(function (connectionRec) {
