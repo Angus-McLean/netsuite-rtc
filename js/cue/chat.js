@@ -75,6 +75,8 @@
 
 	function startVideo() {
 		if(!active.chat) return;
+
+		active.chat.addVideo();
 	}
 
 	function sendMessage() {
