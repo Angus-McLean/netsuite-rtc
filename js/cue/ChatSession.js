@@ -17,9 +17,17 @@
 
 		// create RTC Session
 		this.RTCSession = new RTCSession();
+		addRTCSessionListeners(this, this.RTCSession);
+
+	}
+
+	function addRTCSessionListeners(emitter, rtcSes) {
+		// proxy all listeners
 		this.RTCSession.onAll(function (ev) {
 			self.emit(ev.name, ev.event);
 		});
+
+		RTCSession.on('text', emitter.emit.bind(emitter, 'new_message_received'));
 
 	}
 	ChatSession.prototype = Object.create(EventEmitter.prototype);
@@ -94,8 +102,15 @@
 		return self;
 	};
 
-	ChatSession.prototype.send = function (msgObj) {
+	ChatSession.prototype.sendMessage = function (msgText) {
+		var msgObj = {
+			type : 'text',
+			sender : nlapiGetContext().getUser(),
+			timestampe : new Date(),
+			message : msgText
+		};
 		this.RTCSession.dataChannel.send(JSON.stringify(msgObj));
+		this.emit('new_message_sent', msgObj);
 	};
 
 	window.ChatSession = ChatSession;

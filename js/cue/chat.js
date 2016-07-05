@@ -69,11 +69,7 @@
 	}
 
 	function sendMessage() {
-		active.chat.send({
-			type : 'text',
-			sender : nlapiGetContext().getUser(),
-			message : document.getElementById('btn-input').value
-		});
+		active.chat.sendMessage(document.getElementById('btn-input').value);
 		return false;
 	}
 
@@ -84,8 +80,12 @@
 	};
 
 	function addListenersToChat(chatSesObj) {
-		chatSesObj.on('text', function (msgObj) {
-			console.log(msgObj);
+		chatSesObj.on('new_message_sent', function (msgObj) {
+			console.log('new_message_sent',msgObj);
+		});
+
+		chatSesObj.on('new_message_received', function (msgObj) {
+			console.log('new_message_received',msgObj);
 		});
 	}
 
