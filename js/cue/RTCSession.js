@@ -71,7 +71,10 @@
 		var fileReceiver;
 		console.log('Received datachannel ', arguments);
 		dataChannel.onopen = rtcSessObj.emit.bind(rtcSessObj, 'open');
-		dataChannel.onclose = rtcSessObj.emit.bind(rtcSessObj, 'close');
+		dataChannel.onclose = function (e) {
+			rtcSessObj.peerConnection.close()
+			rtcSessObj.emit('close', e);
+		}
 
 		dataChannel.onmessage = function (e) {
 			console.log('Got message ', e.data);
