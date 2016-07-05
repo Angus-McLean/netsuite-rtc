@@ -11,6 +11,7 @@
 		initObj.employee = nlapiGetContext().getUser();
 
 		active.chat = new ChatSession();
+		addListenersToChat(active.chat);
 		active.chat.initHost(initObj);
 	}
 
@@ -23,6 +24,7 @@
 		//var selected = prompt(msg);
 
 		active.chat = ChatSession.prototype.joinFromId(selected);
+		addListenersToChat(active.chat);
 
 		console.log('Waiting for host to accept your answer..');
 	}
@@ -34,6 +36,7 @@
 		});
 		if(filtered.length) {
 			active.chat = ChatSession.prototype.updateHost(filtered[0]);
+			addListenersToChat(active.chat);
 		} else {
 			start(filtered[0]);
 		}
