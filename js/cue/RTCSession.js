@@ -70,8 +70,8 @@
 		//var fileReceiver = new FileReceiver();
 		var fileReceiver;
 		console.log('Received datachannel ', arguments);
-		dataChannel.onopen = rtcSessObj.emit.bind(this, 'open');
-		dataChannel.onclose = rtcSessObj.emit.bind(this, 'close');
+		dataChannel.onopen = rtcSessObj.emit.bind(rtcSessObj, 'open');
+		dataChannel.onclose = rtcSessObj.emit.bind(rtcSessObj, 'close');
 
 		dataChannel.onmessage = function (e) {
 			console.log('Got message ', e.data);
@@ -99,7 +99,7 @@
 			//var fileReceiver2 = new FileReceiver();
 			var fileReceiver2;
 			var datachannel = e.channel || e; // Chrome sends event, FF sends raw channel
-			addListenersToDataChannel(rtcSessObj, datachannel)
+			addListenersToDataChannel(rtcSessObj, datachannel);
 			rtcSessObj.dataChannel = datachannel;
 		};
 	}
