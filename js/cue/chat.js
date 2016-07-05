@@ -101,12 +101,12 @@
 		});
 
 		chatSesObj.on('open', function (ev) {
-			render_engine.replace(gitBaseURL + '/templates/dialog_message.template.html', {message:'Begining of your conversation'}, chatLog);
+			render_engine.replace(gitBaseURL + '/templates/dialog_message.template.html', {message:'---- Begining of your conversation ----'}, chatLog);
 		});
 
 		chatSesObj.on('close', function (ev) {
 			render_engine.replace(gitBaseURL + '/templates/dialog_message.template.html', {message:'Welcome to NetSuite RTC! ☺'}, chatLog);
-			updateOrStart()
+			//updateOrStart();
 		});
 	}
 
