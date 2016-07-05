@@ -17,15 +17,16 @@
 		// create RTC Session
 		this.RTCSession = new RTCSession();
 
+		EventEmitter.call(this);
 	}
-
+	ChatSession.prototype = Object.create(EventEmitter.prototype);
 	ChatSession.prototype.updateHost = function (initParams) {
 		var self = (this === ChatSession.prototype) ? new ChatSession(initParams) : this;
 		self.RTCSession.role = 'HOST';
 
 		self.RTCSession.createOffer(function (er, offer) {
 			if(er) return console.error(er);
-			self.sessionRecordId = initParams.id
+			self.sessionRecordId = initParams.id;
 			netsuiteRtc_module.updateField(initParams.id, nsFields.OFFER, JSON.stringify(offer));
 		});
 		return self;
