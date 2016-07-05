@@ -5,24 +5,30 @@
 
 	function start() {
 		var initObj = {};
-		initObj.name = prompt('Type Chat Name');
+		//initObj.name = prompt('Type Chat Name');
 		initObj.employee = nlapiGetContext().getUser();
 
 		activeChat = new ChatSession();
 		activeChat.initHost(initObj);
 	}
 
-	function join() {
-		var openCons = netsuiteRtc_module.findOpenConnections();
-		var msg = 'Select the connection (Employee:ChannelName:ID) by typing the ID : \n' + openCons.reduce(function (str, con) {
-			return str += con[netsuiteRtc_module.constants.FIELDS.EMPLOYEE].value + ' : ' + con[netsuiteRtc_module.constants.FIELDS.NAME].value +' : '+ con.id + '\n';
-		}, '');
+	function join(selected) {
+		// var openCons = netsuiteRtc_module.findOpenConnections();
+		// var msg = 'Select the connection (Employee:ChannelName:ID) by typing the ID : \n' + openCons.reduce(function (str, con) {
+		// 	return str += con[netsuiteRtc_module.constants.FIELDS.EMPLOYEE].value + ' : ' + con[netsuiteRtc_module.constants.FIELDS.NAME].value +' : '+ con.id + '\n';
+		// }, '');
 
-		var selected = prompt(msg);
+		//var selected = prompt(msg);
 
 		activeChat = ChatSession.prototype.joinFromId(selected);
 
 		console.log('Waiting for host to accept your answer..');
+	}
+
+	function joinClick(selected) {
+
+		join(selected);
+		
 	}
 
 	function resyncNSChatRec() {
@@ -50,7 +56,7 @@
 
 	var chat_module = {
 		start : start,
-		join : join,
+		joinClick : joinClick,
 		resyncNSChatRec : resyncNSChatRec,
 		updateActiveEmployees : updateActiveEmployees
 	};

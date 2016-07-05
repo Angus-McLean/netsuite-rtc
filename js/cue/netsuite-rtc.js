@@ -12,9 +12,10 @@
 		var conRec = nlapiCreateRecord(RECORD_TYPE);
 		for (var i in connectorObj) {
 			if (connectorObj.hasOwnProperty(i)) {
-				conRec.setFieldValue(i, connectorObj[i])
+				conRec.setFieldValue(i, connectorObj[i]);
 			}
 		}
+		if(!connectorObj.name) conRec.setFieldValue('name', (''+Math.random().slice(2)));
 		return nlapiSubmitRecord(conRec);
 	}
 
