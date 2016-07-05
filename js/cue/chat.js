@@ -81,7 +81,7 @@
 		return false;
 	}
 
-	render_engine.append(gitBaseURL + '/templates/dialog_message.template.html', {message:'Welcome to NetSuite RTC'}, chatLog);
+	render_engine.append(gitBaseURL + '/templates/dialog_message.template.html', {message:'Welcome to NetSuite RTC! ☺'}, chatLog);
 	document.getElementById('btn-input').onkeydown = function (e) {
 		if(e.keyCode == 13){
 			sendMessage();
