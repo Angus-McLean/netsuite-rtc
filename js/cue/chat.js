@@ -100,7 +100,7 @@
 			render_engine.append(gitBaseURL + '/templates/message_receive.template.html', msgObj, chatLog)
 		});
 
-		chatSesObj.on('connected', function (ev) {
+		chatSesObj.on('open', function (ev) {
 			render_engine.replace(gitBaseURL + '/templates/dialog_message.template.html', {message:'Begining of your conversation'}, chatLog);
 		})
 	}

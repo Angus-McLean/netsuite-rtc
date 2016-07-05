@@ -23,9 +23,9 @@
 
 	function addRTCSessionListeners(chatSesObj, rtcSes) {
 		// proxy all listeners
-		// rtcSes.onAll(function (ev) {
-		// 	chatSesObj.emit(ev.name, ev.event);
-		// });
+		rtcSes.onAll(function (ev) {
+			chatSesObj.emit(ev.name, ev.event);
+		});
 
 		rtcSes.on('text', chatSesObj.emit.bind(chatSesObj, 'new_message_received'));
 
