@@ -30,7 +30,7 @@
 	function updateOrStart() {
 		var employeeId = nlapiGetContext().getUser();
 		var filtered = netsuiteRtc_module.reduceToValues(netsuiteRtc_module.findOpenConnections() || []).filter(function (elem) {
-			return elem[netsuiteRtc_module.FIELDS.EMPLOYEE] == employeeId;
+			return elem[netsuiteRtc_module.constants.FIELDS.EMPLOYEE] == employeeId;
 		});
 		if(filtered.length) {
 			active.chat = ChatSession.prototype.updateHost(filtered[0]);
