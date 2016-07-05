@@ -27,7 +27,7 @@
 			self.emit(ev.name, ev.event);
 		});
 
-		RTCSession.on('text', emitter.emit.bind(emitter, 'new_message_received'));
+		rtcSes.on('text', emitter.emit.bind(emitter, 'new_message_received'));
 
 	}
 	ChatSession.prototype = Object.create(EventEmitter.prototype);
