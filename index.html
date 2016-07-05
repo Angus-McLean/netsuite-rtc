@@ -18,8 +18,32 @@
 	</head>
 	<body>
 		<div class="container-fluid row top-buffer">
+			<div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+				<ul class="list-group">
+					<a class="list-group-item active">
+						Active Employees
+					</a>
+					<div id="active-channels-list">
+						<div class="list-group-item">
+							{{EmployeeName}}
+							<a class="pull-right" href="#">Start Call</a>
+						</div>
+						<div class="list-group-item">
+							{{EmployeeName}}
+							<a class="pull-right" href="#">Start Call</a>
+						</div>
+						<div class="list-group-item">
+							{{EmployeeName}}
+							<a class="pull-right" href="#">Start Call</a>
+						</div>
+					</div>
 
-			<div class="col-md-offset-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+				</ul>
+			</div>
+			<div id="video-container" class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+				video here..
+			</div>
+			<div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
 				<div class="panel panel-default">
 					<div class="panel-heading top-bar">
 						<div class="col-md-8 col-xs-8">
@@ -44,7 +68,7 @@
 	</body>
 	<script type="text/javascript">
 		;(function () {
-			var gitBaseURL = "https://raw.githubusercontent.com/Angus-McLean/netsuite-rtc/master";
+			window.gitBaseURL = "https://raw.githubusercontent.com/Angus-McLean/netsuite-rtc/master";
 			if(window.location.host.indexOf('netsuite') > -1) {
 				// inside netsuite context.. lazy load all files
 				cloneCSS();

@@ -1,6 +1,7 @@
 (function () {
 
 	var activeChat;
+	var activeEmployees = [];
 
 	function start() {
 		var initObj = {};
@@ -28,7 +29,14 @@
 		activeChat.resyncSessionRecord();
 	}
 
-
+	function updateActiveEmployees() {
+		var activeChannelsElem = document.getElementById('"active-channels-list');
+		var openCons = netsuiteRtc_module.findOpenConnections();
+		activeChannelsElem.innerHTML = '';
+		openCons.forEach(function (connectionRec) {
+			render_engine.append(gitBaseURL + '/templates/activeUserItem.template.html', connectionRec, activeChannelsElem);
+		});
+	}
 
 	var chat_module = {
 		start : start,
