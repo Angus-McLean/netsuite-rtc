@@ -95,7 +95,8 @@
 		start : start,
 		joinClick : joinClick,
 		resyncNSChatRec : resyncNSChatRec,
-		updateActiveEmployees : updateActiveEmployees
+		updateActiveEmployees : updateActiveEmployees,
+		sendMessage : sendMessage
 	};
 
 	window.chat_module = chat_module;

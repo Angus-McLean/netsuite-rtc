@@ -94,6 +94,10 @@
 		return self;
 	};
 
+	ChatSession.prototype.send = function (msgObj) {
+		self.RTCSession.dataChannel.send(JSON.stringify(msgObj));
+	};
+
 	window.ChatSession = ChatSession;
 	return ChatSession;
 
