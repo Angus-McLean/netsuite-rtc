@@ -23,7 +23,10 @@
 			'AND',
 			[FIELDS.ANSWER, 'isempty', null],
 		];
-		var res = nlapiSearchRecord(RECORD_TYPE, null, filters);
+		var cols = Object.keys(FIELDS).map(function (prop) {
+			return new nlobjSearchColumn(FIELDS[prop]);
+		});
+		var res = nlapiSearchRecord(RECORD_TYPE, null, filters, cols);
 		return searchResultToObj(res);
 	}
 
