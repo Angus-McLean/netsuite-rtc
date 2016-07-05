@@ -23,7 +23,7 @@
 
 	function addRTCSessionListeners(emitter, rtcSes) {
 		// proxy all listeners
-		this.RTCSession.onAll(function (ev) {
+		rtcSes.onAll(function (ev) {
 			self.emit(ev.name, ev.event);
 		});
 
