@@ -4,7 +4,8 @@
 	var FIELDS = {
 		OFFER : 'custrecord_rtc_offer',
 		ANSWER : 'custrecord_rtc_answer',
-		EMPLOYEE : 'custrecord_rtc_host_employee'
+		EMPLOYEE : 'custrecord_rtc_host_employee',
+		NAME : 'name'
 	};
 
 	function initializeConnection(connectorObj) {
