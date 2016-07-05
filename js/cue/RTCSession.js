@@ -78,9 +78,9 @@
 	};
 
 	function addListenersToPeerConnection(rtcSessObj, peerConnection) {
-		peerConnection.onaddstream = function () {
+		peerConnection.onaddstream = function (s) {
 			console.log('triggering addstream', arguments);
-			rtcSessObj.emit.bind(rtcSessObj, 'addstream');
+			rtcSessObj.emit.call(rtcSessObj, 'addstream', s);
 		};
 	}
 
