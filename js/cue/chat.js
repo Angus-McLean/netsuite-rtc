@@ -92,17 +92,21 @@
 
 		chatSesObj.on('new_message_sent', function (msgObj) {
 			console.log('new_message_sent',msgObj);
-			render_engine.append(gitBaseURL + '/templates/message_sent.template.html', msgObj, chatLog)
+			render_engine.append(gitBaseURL + '/templates/message_sent.template.html', msgObj, chatLog);
 		});
 
 		chatSesObj.on('new_message_received', function (msgObj) {
 			console.log('new_message_received',msgObj);
-			render_engine.append(gitBaseURL + '/templates/message_receive.template.html', msgObj, chatLog)
+			render_engine.append(gitBaseURL + '/templates/message_receive.template.html', msgObj, chatLog);
 		});
 
 		chatSesObj.on('open', function (ev) {
 			render_engine.replace(gitBaseURL + '/templates/dialog_message.template.html', {message:'Begining of your conversation'}, chatLog);
-		})
+		});
+
+		chatSesObj.on('close', function (ev) {
+			render_engine.replace(gitBaseURL + '/templates/dialog_message.template.html', {message:'Welcome to NetSuite RTC! ☺'}, chatLog);
+		});
 	}
 
 	var chat_module = {
