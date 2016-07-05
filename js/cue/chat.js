@@ -1,15 +1,17 @@
 (function () {
 
-	var activeChat;
-	var activeEmployees = [];
+	var active = {
+		chat : null,
+		employees : []
+	};
 
 	function start() {
 		var initObj = {};
 		//initObj.name = prompt('Type Chat Name');
 		initObj.employee = nlapiGetContext().getUser();
 
-		activeChat = new ChatSession();
-		activeChat.initHost(initObj);
+		active.chat = new ChatSession();
+		active.chat.initHost(initObj);
 	}
 
 	function join(selected) {
@@ -20,19 +22,31 @@
 
 		//var selected = prompt(msg);
 
-		activeChat = ChatSession.prototype.joinFromId(selected);
+		active.chat = ChatSession.prototype.joinFromId(selected);
 
 		console.log('Waiting for host to accept your answer..');
+	}
+
+	function updateOrStart() {
+		var employeeId = nlapiGetContext().getUser();
+		var filtered = netsuiteRtc_module.reduceToValues(netsuiteRtc_module.findOpenConnections() || []).filter(function (elem) {
+			return elem[netsuiteRtc_module.FIELDS.EMPLOYEE] == employeeId;
+		});
+		if(filtered.length) {
+			active.chat = ChatSession.prototype.updateHost(filtered[0]);
+		} else {
+			start(filtered[0]);
+		}
 	}
 
 	function joinClick(selected) {
 
 		join(selected);
-		
+
 	}
 
 	function resyncNSChatRec() {
-		activeChat.resyncSessionRecord();
+		active.chat.resyncSessionRecord();
 	}
 
 	function updateActiveEmployees() {
@@ -46,15 +60,17 @@
 		}
 
 		var activeChannelsElem = document.getElementById('active-channels-list');
-		var openCons = netsuiteRtc_module.findOpenConnections();
-		openCons = openCons.map(formatSearchResult);
+		active.employees = netsuiteRtc_module.findOpenConnections();
+		active.employees = active.employees.map(formatSearchResult);
 		activeChannelsElem.innerHTML = '';
-		openCons.forEach(function (connectionRec) {
+		active.employees.forEach(function (connectionRec) {
 			render_engine.append(gitBaseURL + '/templates/activeUserItem.template.html', connectionRec, activeChannelsElem);
 		});
 	}
 
 	var chat_module = {
+		active : active,
+		updateOrStart : updateOrStart,
 		start : start,
 		joinClick : joinClick,
 		resyncNSChatRec : resyncNSChatRec,

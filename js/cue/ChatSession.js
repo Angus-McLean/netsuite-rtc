@@ -19,6 +19,17 @@
 
 	}
 
+	ChatSession.prototype.updateHost = function (initParams) {
+		var self = (this === ChatSession.prototype) ? new ChatSession(initParams) : this;
+		this.RTCSession.role = 'HOST';
+
+		this.RTCSession.createOffer(function (er, offer) {
+			if(er) return console.error(er);
+
+			self.sessionRecordId = netsuiteRtc_module.updateField(initParams.id, nsFields.OFFER, JSON.stringify(offer));
+		});
+	};
+
 	ChatSession.prototype.initHost = function (initParams) {
 		// get offer RTCSession offer
 		var self = this;

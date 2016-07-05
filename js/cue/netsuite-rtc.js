@@ -57,7 +57,7 @@
 	function reduceToValues(arrOrObj) {
 		function reduceObj(obj){
 			return Object.keys(obj).reduce(function (final, key) {
-				final[key] = (obj[key] && obj[key].value !== undefined) ? final[key] = obj[key].value : final[key] = obj[key];
+				final[key] = (obj[key] && obj[key].value !== undefined) ? obj[key].value : obj[key];
 				return final;
 			}, {});
 		}
