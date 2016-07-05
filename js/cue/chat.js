@@ -89,7 +89,12 @@
 	};
 
 	function addListenersToChat(chatSesObj) {
-
+		chatSesObj.on('addstream', function (e) {
+			console.log('Got remote stream', e.stream)
+			var el = document.getElementById('remoteVideo')
+			el.autoplay = true
+			el.src = webkit.createObjectURL(e.stream);
+		})
 		chatSesObj.on('new_message_sent', function (msgObj) {
 			console.log('new_message_sent',msgObj);
 			render_engine.append(gitBaseURL + '/templates/message_sent.template.html', msgObj, chatLog);
