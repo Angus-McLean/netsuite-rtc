@@ -54,6 +54,7 @@
 		if(JSON.stringify(newRec) !== JSON.stringify(this.sessionRecord)) {
 			// record has changed
 			// if new record has ANSWER accept the offer
+			this.sessionRecord = newRec;
 			if(newRec[nsFields.ANSWER]) this.acceptOffer(newRec[nsFields.ANSWER]);
 		}
 	};
