@@ -14,7 +14,7 @@
 	function join() {
 		var openCons = netsuiteRtc_module.findOpenConnections();
 		var msg = 'Select the connection (Employee:ChannelName:ID) by typing the ID : \n' + openCons.reduce(function (str, con) {
-			return str += con[netsuiteRtc_module.FIELDS.EMPLOYEE].value + ' : ' + con.name.value +' : '+ con.id + '\n';
+			return str += con[netsuiteRtc_module.constants.FIELDS.EMPLOYEE].value + ' : ' + con.name.value +' : '+ con.id + '\n';
 		}, '');
 
 		var selected = prompt(msg);
