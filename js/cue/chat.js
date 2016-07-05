@@ -106,7 +106,7 @@
 
 		chatSesObj.on('close', function (ev) {
 			render_engine.replace(gitBaseURL + '/templates/dialog_message.template.html', {message:'Welcome to NetSuite RTC! ☺'}, chatLog);
-			updateOrStart();
+			//updateOrStart();
 		});
 	}
 
