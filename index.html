@@ -3,12 +3,12 @@
 	<head>
 		<meta charset="utf-8">
 		<title>NetSuite - WebRTC</title>
-		
+
 		<link angus href="/css/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link angus href="/css/styles.css" rel="stylesheet">
-		
+
 		<script angus type="text/javascript" src="/js/cue/webrtc-adapter/adapter.js"></script>
-		
+
 		<script angus type="text/javascript" src="/js/cue/render_engine.js"></script>
 		<!-- <script angus type="text/javascript" src="/js/cue/generic-rtc.js"></script> -->
 		<script angus type="text/javascript" src="/js/cue/RTCSession.js"></script>
@@ -18,7 +18,7 @@
 	</head>
 	<body>
 		<div class="container-fluid row top-buffer">
-			
+
 			<div class="col-md-offset-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
 				<div class="panel panel-default">
 					<div class="panel-heading top-bar">
@@ -26,9 +26,9 @@
 							<h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span> Chat - {{chatname}}</h3>
 						</div>
 					</div>
-					<div class="panel-body msg_container_base">
+					<div id="message-container" class="panel-body msg_container_base">
 						<!-- chat messages go here -->
-						
+
 					</div>
 					<div class="panel-footer">
 						<div class="input-group">
@@ -50,10 +50,10 @@
 				cloneCSS();
 				evalAllScripts();
 			}
-			
+
 			function fetchRespText(url, asyncOrCb) {
 				var execAsync = typeof asyncOrCb === 'function';
-				
+
 				var xhr = new XMLHttpRequest();
 				xhr.open('GET', url, execAsync);
 				xhr.send()
@@ -67,7 +67,7 @@
 				};
 				return xhr.responseText;
 			}
-			
+
 			function evalAllScripts() {
 				getScriptURLs().forEach(function (u) {
 					var jsText = fetchRespText(u, false);
@@ -75,30 +75,30 @@
 					eval.call(window, jsText);
 				});
 			}
-			
+
 			function getScriptURLs() {
 				return Array.prototype.map.call(document.querySelectorAll('script[angus][src]'), function (e) {
 					return gitBaseURL + e.src.replace(location.origin, '') + '?nochache=' + (''+Math.random()).slice(2);
 				});
 			}
-			
+
 			function cloneCSS() {
 				Array.prototype.forEach.call(document.querySelectorAll('link[angus][href]'), function (e) {
 					var cssElem = document.createElement('style');
 					cssElem.type = 'text/css';
-					
+
 					fetchRespText(gitBaseURL + e.href.replace(location.origin, ''), function (rawCssText) {
 						if (cssElem.styleSheet){
 							cssElem.styleSheet.cssText = rawCssText;
 						} else {
 							cssElem.appendChild(document.createTextNode(rawCssText));
 						}
-						
+
 						document.head.appendChild(cssElem);
 					});
 				});
-			}	
+			}
 		})();
-		
+
 	</script>
 </html>

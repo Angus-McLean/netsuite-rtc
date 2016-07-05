@@ -1,11 +1,12 @@
 (function () {
-	
+
 	var RECORD_TYPE = 'customrecord_webrtc_connector';
 	var FIELDS = {
 		OFFER : 'custrecord_rtc_offer',
-		ANSWER : 'custrecord_rtc_answer'
+		ANSWER : 'custrecord_rtc_answer',
+		EMPLOYEE : 'custrecord_rtc_host_employee'
 	};
-	
+
 	function initializeConnection(connectorObj) {
 		var conRec = nlapiCreateRecord(RECORD_TYPE);
 		for (var i in connectorObj) {
@@ -25,22 +26,22 @@
 		var res = nlapiSearchRecord(RECORD_TYPE, null, filters);
 		return searchResultToObj(res);
 	}
-	
+
 	function loadChatRecordObject(id) {
 		return recordToObject(nlapiLoadRecord(RECORD_TYPE,id));
 	}
-	
+
 	function searchResultToObj(searchRes) {
 		return searchRes && searchRes.map(function (row) {
-			
+
 			var retObj = a.valuesByKey;
 			retObj.id = row.id;
 			retObj.type = row.type;
-			
+
 			return retObj;
 		});
 	}
-	
+
 	function recordToObject(record) {
 		return Object.keys(FIELDS).reduce(function (obj, f) {
 			obj[FIELDS[f]] = record.getFieldValue(FIELDS[f]);
@@ -50,11 +51,11 @@
 			type : record.getRecordType()
 		});
 	}
-	
+
 	function updateField(recId, fields, values) {
 		nlapiSubmitField(RECORD_TYPE, recId, fields, values);
 	}
-	
+
 	var netsuiteRtc_module = {
 		constants : {
 			RECORD_TYPE : RECORD_TYPE,
@@ -68,5 +69,5 @@
 	};
 	window.netsuiteRtc_module = netsuiteRtc_module;
 	return netsuiteRtc_module;
-	
+
 })();
