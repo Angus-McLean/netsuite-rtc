@@ -30,6 +30,18 @@
 		this.remoteAnswer = null;
 
 		this.peerConnection = new RTCPeerConnection(cfg, con);
+
+		navigator.getUserMedia = navigator.getUserMedia ||
+		navigator.webkitGetUserMedia ||
+		navigator.mozGetUserMedia ||
+		navigator.msGetUserMedia;
+		navigator.getUserMedia({video: true, audio: true}, function (stream) {
+			self.peerConnection.addStream(stream);
+			console.log(stream);
+		}, function (error) {
+			console.log('Error adding stream to pc1: ' + error);
+		});
+
 		addListenersToPeerConnection(this, this.peerConnection);
 		this.dataChannel = null;
 

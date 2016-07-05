@@ -117,16 +117,7 @@
 	ChatSession.prototype.addVideo = function () {
 		var self = this;
 
-		navigator.getUserMedia = navigator.getUserMedia ||
-		navigator.webkitGetUserMedia ||
-		navigator.mozGetUserMedia ||
-		navigator.msGetUserMedia;
-		navigator.getUserMedia({video: true, audio: true}, function (stream) {
-			self.RTCSession.peerConnection.addStream(stream);
-			console.log(stream);
-		}, function (error) {
-			console.log('Error adding stream to pc1: ' + error);
-		});
+		
 	};
 
 	window.ChatSession = ChatSession;
