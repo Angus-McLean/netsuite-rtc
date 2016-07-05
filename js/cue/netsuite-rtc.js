@@ -34,7 +34,7 @@
 	function searchResultToObj(searchRes) {
 		return searchRes && searchRes.map(function (row) {
 
-			var retObj = a.valuesByKey;
+			var retObj = row.valuesByKey;
 			retObj.id = row.id;
 			retObj.type = row.type;
 
