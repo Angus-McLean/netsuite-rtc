@@ -28,7 +28,7 @@
 		active.chat = ChatSession.prototype.joinFromId(selected);
 		addListenersToChat(active.chat);
 
-		render_engine.append(gitBaseURL + '/templates/dialog_mesage.template.html', {message:'Sit tight while we connect you..'}, chatLog);
+		render_engine.append(gitBaseURL + '/templates/dialog_message.template.html', {message:'Sit tight while we connect you..'}, chatLog);
 	}
 
 	function updateOrStart() {
@@ -81,7 +81,7 @@
 		return false;
 	}
 
-	render_engine.append(gitBaseURL + '/templates/dialog_mesage.template.html', {message:'Welcome to NetSuite RTC'}, chatLog);
+	render_engine.append(gitBaseURL + '/templates/dialog_message.template.html', {message:'Welcome to NetSuite RTC'}, chatLog);
 	document.getElementById('btn-input').onkeydown = function (e) {
 		if(e.keyCode == 13){
 			sendMessage();
@@ -101,7 +101,7 @@
 		});
 
 		chatSesObj.on('open', function (ev) {
-			render_engine.replace(gitBaseURL + '/templates/dialog_mesage.template.html', {message:'Begining of your conversation'}, chatLog);
+			render_engine.replace(gitBaseURL + '/templates/dialog_message.template.html', {message:'Begining of your conversation'}, chatLog);
 		})
 	}
 
