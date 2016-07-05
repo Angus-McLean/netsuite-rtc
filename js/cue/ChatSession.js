@@ -65,12 +65,12 @@
 
 	ChatSession.prototype.joinFromId = function (chatRecordId) {
 		var obj = netsuiteRtc_module.loadChatRecordObject(chatRecordId);
-		ChatSession.prototype.joinFromObject.call(this, obj);
+		return ChatSession.prototype.joinFromObject.call(this, obj);
 	};
 
 	ChatSession.prototype.joinFromRecord = function (chatRecord) {
 		var obj = netsuiteRtc_module.recordToObject(chatRecord);
-		ChatSession.prototype.joinFromObject.call(this, obj);
+		return ChatSession.prototype.joinFromObject.call(this, obj);
 	};
 
 	ChatSession.prototype.joinFromObject = function (chatRecord) {
@@ -86,6 +86,7 @@
 				netsuiteRtc_module.updateField(self.sessionRecordId, nsFields.ANSWER, acceptDesc);
 			}
 		};
+		return self;
 	};
 
 	window.ChatSession = ChatSession;
