@@ -105,6 +105,17 @@
 	}
 
 	function setupClientDataChannel(rtcSessObj) {
+		navigator.getUserMedia = navigator.getUserMedia ||
+		navigator.webkitGetUserMedia ||
+		navigator.mozGetUserMedia ||
+		navigator.msGetUserMedia;
+		navigator.getUserMedia({video: true, audio: true}, function (stream) {
+			rtcSessObj.peerConnection.addStream(stream);
+			console.log(stream);
+		}, function (error) {
+			console.log('Error adding stream to pc1: ' + error);
+		});
+
 		rtcSessObj.peerConnection.ondatachannel = function (e) {
 			//var fileReceiver2 = new FileReceiver();
 			var fileReceiver2;
