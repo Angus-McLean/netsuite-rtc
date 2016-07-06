@@ -43,7 +43,7 @@
 			active.chat = ChatSession.prototype.updateHost(filtered[0]);
 			addListenersToChat(active.chat);
 		} else {
-			start(filtered[0]);
+			start();
 		}
 	}
 
@@ -104,7 +104,7 @@
 			el.autoplay = true;
 			el.src = window.URL.createObjectURL(e.stream);
 		});
-		
+
 		chatSesObj.on('new_message_sent', function (msgObj) {
 			console.log('new_message_sent',msgObj);
 			render_engine.append(gitBaseURL + '/templates/message_sent.template.html', msgObj, chatLog);

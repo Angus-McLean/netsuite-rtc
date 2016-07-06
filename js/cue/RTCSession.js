@@ -29,17 +29,6 @@
 
 		this.peerConnection = new RTCPeerConnection(cfg, con);
 
-		navigator.getUserMedia = navigator.getUserMedia ||
-		navigator.webkitGetUserMedia ||
-		navigator.mozGetUserMedia ||
-		navigator.msGetUserMedia;
-		navigator.getUserMedia({video: true, audio: true}, function (stream) {
-			self.peerConnection.addStream(stream);
-			console.log(stream);
-		}, function (error) {
-			console.log('Error adding stream to pc1: ' + error);
-		});
-
 		addListenersToPeerConnection(this, this.peerConnection);
 		this.dataChannel = null;
 
@@ -165,19 +154,32 @@
 	}
 
 	function setupHostConnection(rtcSessObj, cb) {
-		rtcSessObj.peerConnection.createOffer(
-			function (desc) {
-				rtcSessObj.peerConnection.setLocalDescription(desc, function () {}, function () {});
-				rtcSessObj.offer = desc;
-				console.info(JSON.stringify(desc).replace(/\\/g,'\\\\'));
-				if(cb) cb(null, desc);
-			},
-			function (e) {
-				console.warn("Couldn't create offer");
-				if(cb) cb(e, null);
-			},
-			sdpConstraints
-		);
+		navigator.getUserMedia = navigator.getUserMedia ||
+		navigator.webkitGetUserMedia ||
+		navigator.mozGetUserMedia ||
+		navigator.msGetUserMedia;
+		navigator.getUserMedia({video: true, audio: true}, function (stream) {
+			self.peerConnection.addStream(stream);
+
+			rtcSessObj.peerConnection.createOffer(
+				function (desc) {
+					rtcSessObj.peerConnection.setLocalDescription(desc, function () {}, function () {});
+					rtcSessObj.offer = desc;
+					console.info(JSON.stringify(desc).replace(/\\/g,'\\\\'));
+					if(cb) cb(null, desc);
+				},
+				function (e) {
+					console.warn("Couldn't create offer");
+					if(cb) cb(e, null);
+				},
+				sdpConstraints
+			);
+
+			console.log(stream);
+		}, function (error) {
+			console.log('Error adding stream to pc1: ' + error);
+		});
+
 	}
 
 	window.RTCSession = RTCSession;
