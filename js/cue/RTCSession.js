@@ -159,7 +159,7 @@
 		navigator.mozGetUserMedia ||
 		navigator.msGetUserMedia;
 		navigator.getUserMedia({video: true, audio: true}, function (stream) {
-			self.peerConnection.addStream(stream);
+			rtcSessObj.peerConnection.addStream(stream);
 
 			rtcSessObj.peerConnection.createOffer(
 				function (desc) {
